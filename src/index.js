@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import FileInput from './components/FileInput.jsx';
 
+//TODO: Take values, fill out fields for each relevant item, and build out API script string
 class App extends React.Component {
   constructor() {
     super();
