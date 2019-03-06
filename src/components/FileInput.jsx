@@ -8,16 +8,22 @@ class FileInput extends React.Component {
     this.file = React.createRef();
   }
 
-  buildText(content) {
-    console.log(content);
-    return content.items.map(item => {return item.str}).join('');
+  cleanString(str) {
+    return str.replace(/\s+/g, ' ');
   }
 
-  // TODO: Get both text and annotations
-  //   For text, extract item.str
-  //   For annotations, extract, maybe?:item.{alternativeText, fieldName, fieldValue}
+  parseContents(content) {
+    let obj = {};
+    content.forEach(item => {
+      obj[this.cleanString(item.fieldName)] = item.fieldValue;
+    });
+
+    return obj;
+  }
+
+  // TODO: Handle equipment and spells
   getTextContent(pdf) {
-    return pdf.getPage(1).then(page => {console.log(page); return page.getAnnotations();});
+    return pdf.getPage(1).then(page => page.getAnnotations());
   }
 
   handleSubmit(e) {
@@ -31,8 +37,8 @@ class FileInput extends React.Component {
           return this.getTextContent(pdf);
         })
         .then(content => {
-          let text = this.buildText(content);
-          this.props.onFileChange(text);
+          let contents = this.parseContents(content);
+          this.props.onFileChange(contents);
         });
     }
 
