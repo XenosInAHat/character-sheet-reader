@@ -52,7 +52,6 @@ class FileInput extends React.Component {
           Upload PDF:
           <input type='file' ref={this.file} />
         </label>
-        <br />
         <button type='submit'>Submit</button>
       </form>
     );
