@@ -9,7 +9,7 @@ class FileInput extends React.Component {
   }
 
   cleanString(str) {
-    return str.replace(/\s+/g, ' ');
+    return str.replace(/\s+/g, ' ').trim();
   }
 
   parseContents(content) {
@@ -47,12 +47,9 @@ class FileInput extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Upload PDF:
-          <input type='file' ref={this.file} />
-        </label>
-        <button type='submit'>Submit</button>
+      <form className='file-input' onSubmit={this.handleSubmit}>
+        <input type='file' ref={this.file} />
+        <button type='submit' className='btn btn-primary'>Read Sheet</button>
       </form>
     );
   }
